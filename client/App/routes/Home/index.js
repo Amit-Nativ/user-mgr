@@ -34,7 +34,7 @@ export default () => {
       const { data } = await Axios.get(`/api/users/${query}`);
       setData(data)
     } catch (e) {
-      console.log(e)
+      logger.error(e);
       setError(true)
     }
   }
@@ -54,7 +54,7 @@ export default () => {
     try {
       response = await Axios.put(`/api/users`, { admins, groups });
     } catch (e) {
-      console.log(e)
+      logger.error(e);
       if (e.response.status === 400) {
         alert(`לא כל המשתמשים עודכנו. יש לקשר משתמש רק לנפה קיימת.`)
       }
