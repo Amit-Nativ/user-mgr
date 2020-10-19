@@ -25,8 +25,6 @@ export default () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-
-
   app.use(staticGzip(join(resolve(), '..', '..', '..', 'client')));
   app.use(compression());
 

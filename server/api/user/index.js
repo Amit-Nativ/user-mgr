@@ -1,6 +1,5 @@
 import { AsyncRouter } from 'express-async-router';
-import { getAll, update, getByQuery } from './user.controller';
-import { isAuthenticated } from '../../auth/auth.service'
+import { update, getByQuery } from './user.controller';
 
 const router = new AsyncRouter();
 

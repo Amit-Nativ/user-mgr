@@ -33,8 +33,10 @@ const users = [{ "user_name": "אמיל סופר", "id": "8372435", "phone_numbe
 { "user_name": "מור גורן", "id": "goren.mor", "phone_number": "0504590440", "investigation_group": "12", "is_admin": "false" }];
 
 const CONNECTION_STRING = {
-    connectionString: process.env.CONNECTION_STRING
+    connectionString: process.env.CONN
 };
+
+console.log(process.env.CONN)
 
 const pool = new Pool({
     ...CONNECTION_STRING,
