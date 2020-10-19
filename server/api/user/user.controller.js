@@ -1,6 +1,7 @@
 import createError from 'http-errors';
 import _ from 'lodash';
 import { Pool } from 'pg';
+import logger from '../../config/logger'
 
 const usersStub = [{ "user_name": "אמיל סופר", "id": "8372435", "phone_number": "0524846380", "investigation_group": "12", "is_admin": "false" },
 { "user_name": "דביר בצלאלי", "id": "8360205", "phone_number": "0509900070", "investigation_group": "12", "is_admin": "false" },
@@ -95,7 +96,7 @@ const updateInvestigationGroup = async (body) => {
             );
 
             updated.push(user.id)
-        } catch (e) { logger.error(e); }
+        } catch (e) { logger.error(`could not update group for user ${user.id}`); }
     });
 
     return updated;

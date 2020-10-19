@@ -29,6 +29,10 @@ export default bunyan.createLogger({
         {
             level: 'info',
             path: filePath
+        },
+        {
+            level: 'error',
+            path: filePath
         }
     ]
 });
