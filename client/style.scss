@@ -1,0 +1,80 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  direction: rtl;
+}
+// 100 Thin
+// 200 Extra Light
+// 300 Light
+// 400 Normal
+// 500 Medium
+// 600 Semi Bold
+// 700 Bold
+// 800 Extra Bold
+// 900 Ultra Bold
+
+@font-face {
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face { // Extra Bold
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face { // Extra Bold Italic
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face { // Bold
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face { // Bold Italic
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face { // Italic
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face { // Light
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face { // Light Italic
+  font-family: 'OpenSansHebrew';
+  src:  url('./assets/fonts/OpenSansHebrew-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+a:-webkit-any-link { 
+    color:  inherit; 
+    text-decoration: none;
+}
