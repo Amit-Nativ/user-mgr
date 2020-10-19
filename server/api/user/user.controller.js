@@ -65,7 +65,7 @@ export const update = async (req, res) => {
         res.status(200).send("updated users groups: " + updated + " updated admins:" + admins.map(x => x.id))
     }
     catch (e) {
-        console.log(e)
+        logger.error(e);
         res.status(400).send("failed updating investigation group for all users")
     }
 };
@@ -77,7 +77,7 @@ const turnOnOffAdmin = async (body) => {
         await pool.query(
             `UPDATE public."user" SET is_admin='${element.is_admin}' WHERE id='${element.id}'; `
         );
-        console.log(
+        logger.info(
             `successfully changed the status of the admin_id : ${element.id} to the following status: ${element.is_admin}`
         );
     });
@@ -95,7 +95,7 @@ const updateInvestigationGroup = async (body) => {
             );
 
             updated.push(user.id)
-        } catch (e) { }
+        } catch (e) { logger.error(e); }
     });
 
     return updated;
