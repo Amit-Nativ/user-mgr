@@ -9,7 +9,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-    mode: process.env.NODE_ENV,
+    mode: 'production',
     resolve: {
         alias: {
             'react-dom': '@hot-loader/react-dom',

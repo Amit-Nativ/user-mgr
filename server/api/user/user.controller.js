@@ -1,9 +1,8 @@
 import createError from 'http-errors';
 import _ from 'lodash';
-import User from './user.model';
 import { Pool } from 'pg';
 
-const users = [{ "user_name": "אמיל סופר", "id": "8372435", "phone_number": "0524846380", "investigation_group": "12", "is_admin": "false" },
+const usersStub = [{ "user_name": "אמיל סופר", "id": "8372435", "phone_number": "0524846380", "investigation_group": "12", "is_admin": "false" },
 { "user_name": "דביר בצלאלי", "id": "8360205", "phone_number": "0509900070", "investigation_group": "12", "is_admin": "false" },
 { "user_name": "דורין בביוף", "id": "8476535", "phone_number": "0502146039", "investigation_group": "12", "is_admin": "false" },
 { "user_name": "גיל צימרמן", "id": "8298195", "phone_number": "0528474791", "investigation_group": "12", "is_admin": "false" },
@@ -35,8 +34,6 @@ const users = [{ "user_name": "אמיל סופר", "id": "8372435", "phone_numbe
 const CONNECTION_STRING = {
     connectionString: process.env.CONN
 };
-
-console.log(process.env.CONN)
 
 const pool = new Pool({
     ...CONNECTION_STRING,
