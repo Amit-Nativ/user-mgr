@@ -11,7 +11,7 @@ import helmet from 'helmet';
 import mongooseErrors from 'express-mongoose-errors';
 import jsonErrorHandler from 'express-json-error-handler';
 import inProduction from 'in-production';
-import logger from 'env-bunyan';
+import logger from './logger';
 import staticGzip from 'express-static-gzip';
 
 export default () => {
