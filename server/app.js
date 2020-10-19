@@ -1,6 +1,6 @@
 import 'dotenv-extended/config';
 import createApp from './config/express/index.js';
-import logger from 'env-bunyan';
+import logger from './config/logger';
 
 export const app = createApp();
 
