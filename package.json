@@ -79,6 +79,7 @@
     "cookie-parser": "^1.4.5",
     "copyfiles": "^2.4.0",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
     "deezer-web-api": "^1.7.2",
     "dotenv-extended": "^2.8.0",
     "email-address": "^1.2.2",

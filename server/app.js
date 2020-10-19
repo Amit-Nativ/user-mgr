@@ -1,4 +1,5 @@
 import 'dotenv-extended/config';
+import "regenerator-runtime/runtime.js";
 import createApp from './config/express/index.js';
 import logger from './config/logger';
 

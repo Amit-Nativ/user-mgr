@@ -13,10 +13,12 @@ import jsonErrorHandler from 'express-json-error-handler';
 import inProduction from 'in-production';
 import logger from '../logger';
 import staticGzip from 'express-static-gzip';
+import cors from 'cors';
 
 export default () => {
   const app = express();
 
+  app.use(cors())
   app.use(helmet());
   app.use(bodyparser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
   app.use(bodyparser.json({ limit: '50mb' }));
@@ -25,7 +27,8 @@ export default () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(staticGzip(join(resolve(), '..', '..', '..', 'client')));
+  app.use(express.static(join(__dirname, "js")));
+  app.use(staticGzip( '../../../client'));
   app.use(compression());
 
   if (!inProduction) {

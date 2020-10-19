@@ -28,14 +28,14 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         historyApiFallback: true,
-        contentBase: './dist',
-        hot: true,
-        compress: true,
-        port: process.env.WEBPACK_PORT,
-        proxy: {
-            '/api': `http://localhost:${process.env.PORT}`,
-            '/auth': `http://localhost:${process.env.PORT}`
-        }
+        // contentBase: './dist',
+        // hot: true,
+        // compress: true,
+        // port: process.env.WEBPACK_PORT,
+        // proxy: {
+        //     '/api': `http://localhost:${process.env.PORT}`,
+        //     '/auth': `http://localhost:${process.env.PORT}`
+        // }
     },
     plugins: [
         new CleanWebpackPlugin(),
