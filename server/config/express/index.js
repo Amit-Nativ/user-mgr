@@ -2,17 +2,9 @@ import { join, resolve } from 'path';
 import routes from './routes.js';
 import express from 'express';
 import morgan from 'morgan';
-import compression from 'compression';
 import bodyparser from 'body-parser';
-import methodOverride from 'method-override';
-import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import helmet from 'helmet';
-import mongooseErrors from 'express-mongoose-errors';
-import jsonErrorHandler from 'express-json-error-handler';
 import inProduction from 'in-production';
-import logger from '../logger';
-import staticGzip from 'express-static-gzip';
 import cors from 'cors';
 
 export default () => {
@@ -33,13 +25,6 @@ export default () => {
   }
 
   routes(app);
-
-  // app.use(mongooseErrors());
-  app.use(jsonErrorHandler({
-    log({ err, req, res }) {
-      logger.error({ err, req, res });
-    }
-  }));
 
   return app;
 };
