@@ -27,8 +27,8 @@ export default () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(express.static(join(__dirname, "js")));
-  app.use(staticGzip( '../../../client'));
+  app.use(express.static(join(__dirname, "../../../client")));
+  // app.use(staticGzip( '../../../client'));
   app.use(compression());
 
   if (!inProduction) {
