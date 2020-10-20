@@ -26,7 +26,7 @@ export default () => {
 
   app.use(express.static(join(__dirname, "../../../client")));
   // app.use(staticGzip( '../../../client'));
-  app.use(compression());
+  // app.use(compression());
 
   if (!inProduction) {
     app.use(morgan('dev'));
@@ -34,7 +34,7 @@ export default () => {
 
   routes(app);
 
-  app.use(mongooseErrors());
+  // app.use(mongooseErrors());
   app.use(jsonErrorHandler({
     log({ err, req, res }) {
       logger.error({ err, req, res });
