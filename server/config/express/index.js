@@ -14,11 +14,8 @@ export default () => {
   app.use(helmet());
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(bodyparser.json());
-  // app.use(methodOverride());
 
-  app.use(express.static(join(__dirname, "../../../client")));
-  // app.use(staticGzip( '../../../client'));
-  // app.use(compression());
+  app.use(express.static(join(__dirname, "../../client")));
 
   if (!inProduction) {
     app.use(morgan('dev'));

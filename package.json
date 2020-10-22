@@ -9,7 +9,7 @@
     "server-dev": "nodemon --watch server --exec babel-node server/app.js",
     "build": "npm run clean && npm run build-server && npm run build-client",
     "build-client": "webpack --env=production --mode=production  --define process.env.NODE_ENV=\"'production'\"",
-    "build-server": "babel server -d dist/server -s && npm run copy-env",
+    "build-server": "babel server -d dist -s && npm run copy-env",
     "copy-env": "copyfiles .env dist"
   },
   "repository": {

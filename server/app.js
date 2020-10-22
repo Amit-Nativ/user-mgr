@@ -16,7 +16,7 @@ const expressStarted = new Promise(resolve => {
 
 export const started = Promise.all([
   expressStarted
-]);
+]).catch(err => logger.error(err));
 
 export const close = () => {
   server.close();
