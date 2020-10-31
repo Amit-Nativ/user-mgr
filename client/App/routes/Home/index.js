@@ -10,6 +10,7 @@ export default () => {
   const [error, setError] = useState(false);
   const [adminsDiff, setAdminsDiff] = useState({});
   const [groupDiff, setGroupDiff] = useState({});
+  const [cityDiff, setCityDiff] = useState({});
 
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
@@ -19,6 +20,12 @@ export default () => {
     data[name].investigation_group = value;
 
     setGroupDiff(x => ({ ...x, [data[name].id]: { investigation_group: value } }));
+  }
+
+  const handleCityChange = ({ target: { value, name } }) => {
+    data[name].city = value;
+
+    setCityDiff(x => ({ ...x, [data[name].id]: { city: value } }));
   }
 
   const handleAdminChange = ({ target: { checked, name } }) => {
@@ -43,16 +50,18 @@ export default () => {
     setError(false);
     setAdminsDiff({});
     setGroupDiff({});
+    setCityDiff({});
   }
 
   const submit = async () => {
     const groups = Object.keys(groupDiff).map(x => ({ id: x, ...groupDiff[x] }))
+    const cities = Object.keys(cityDiff).map(x => ({ id: x, ...cityDiff[x] }))
     const admins = Object.keys(adminsDiff).map(x => ({ id: x, ...adminsDiff[x] }))
 
     var response = { data: {} };
 
     try {
-      response = await Axios.put(`/api/users`, { admins, groups });
+      response = await Axios.put(`/api/users`, { admins, groups, cities });
     } catch (e) {
       console.log(e);
       if (e.response.status === 400) {
@@ -76,7 +85,7 @@ export default () => {
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
-        <ResultsTable results={data} onGroupChange={handleGroupChange} onAdminChange={handleAdminChange} />
+        <ResultsTable results={data} onGroupChange={handleGroupChange} onCityChange={handleCityChange} onAdminChange={handleAdminChange} />
         <Button onClick={submit} color='primary'>{'שמור'}</Button>
       </Box>}
     </Box>

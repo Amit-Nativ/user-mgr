@@ -5,9 +5,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Checkbox, makeStyles, TextField } from '@material-ui/core';
+import { Checkbox, makeStyles, MenuItem, TextField } from '@material-ui/core';
+import { invjson } from '../../../../assets/resources/investigation-groups'
 
-export default ({ results, onGroupChange, onAdminChange }) => {
+export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
     const classes = useStyles();
 
     return (
@@ -19,6 +20,7 @@ export default ({ results, onGroupChange, onAdminChange }) => {
                         <TableCell align="right">{'שם מלא'}</TableCell>
                         <TableCell align="right">{'נפה'}</TableCell>
                         <TableCell align="right">{'אדמין'}</TableCell>
+                        <TableCell align="right">{'עיר'}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -29,9 +31,15 @@ export default ({ results, onGroupChange, onAdminChange }) => {
                             <TableCell align="right"
                                 name={i}
                                 value={user.investigation_group}
+                                select
                                 component={TextField}
                                 type='number'
                                 onChange={onGroupChange}>
+                                {invjson.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
                                 {user.investigation_group}
                             </TableCell>
                             <TableCell align="right" name={user.id}>
@@ -40,6 +48,20 @@ export default ({ results, onGroupChange, onAdminChange }) => {
                                     name={i}
                                     checked={user.is_admin ? true : false}
                                     onChange={onAdminChange} />
+                            </TableCell>
+                            <TableCell align="right"
+                                name={i}
+                                value={user.city}
+                                select
+                                component={TextField}
+                                type='number'
+                                onChange={onCityChange}>
+                                {invjson.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                                {user.investigation_group}
                             </TableCell>
                         </TableRow>
                     ))}
