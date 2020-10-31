@@ -44,6 +44,8 @@ const pool = new Pool({
 })
 
 export const getByQuery = async ({ params: { query } }) => {
+    return usersStub;
+
     const result = await pool.query(
         `SELECT user_name,id,investigation_group,is_admin,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
     );
@@ -61,13 +63,14 @@ export const getByQuery = async ({ params: { query } }) => {
 
 export const update = async (req, res) => {
     try {
-        const { groups, admins, cities } = req.body;
+        const { groups, admins, cities, names } = req.body;
 
         const updatedGroup = await updateInvestigationGroup(groups)
         const updatedCity = await updateCity(cities)
+        const updatedNames = await updateNames(names)
         await turnOnOffAdmin(admins);
 
-        res.status(200).send("updated users groups: " + updatedGroup + "\n updated admins:" + admins.map(x => x.id) + "\n updated users cities: " + updatedCity)
+        res.status(200).send("updated users groups: " + updatedGroup + "\n updated admins:" + admins.map(x => x.id) + "\n updated users cities: " + updatedCity + "\n updated users names: " + updatedNames)
     }
     catch (e) {
         logger.error(e);
@@ -108,7 +111,7 @@ const updateInvestigationGroup = async (body) => {
 }
 
 const updateCity = async (body) => {
-    //EXPECT : {[{"id": "ANSWER", "ivestigation_group": "ANSWER"},{"id": "ANSWER", "ivestigation_group": "ANSWER"}]}
+    //EXPECT : {[{"id": "ANSWER", "city": "ANSWER"},{"id": "ANSWER", "city": "ANSWER"}]}
     var updated = []
 
     body.forEach(async (user) => {
@@ -120,6 +123,24 @@ const updateCity = async (body) => {
 
             updated.push(user.id)
         } catch (e) { logger.error(`could not update city for user ${user.id}`); }
+    });
+
+    return updated;
+}
+
+const updateNames = async (body) => {
+    //EXPECT : {[{"id": "ANSWER", "user_name": "ANSWER"},{"id": "ANSWER", "user_name": "ANSWER"}]}
+    var updated = []
+
+    body.forEach(async (user) => {
+        // console.log(user)
+        try {
+            var value = await pool.query(
+                `UPDATE public."user" SET user_name='${user.user_name}' WHERE id='${user.id}'; `
+            );
+
+            updated.push(user.id)
+        } catch (e) { logger.error(`could not update user_name for user ${user.id}`); }
     });
 
     return updated;
