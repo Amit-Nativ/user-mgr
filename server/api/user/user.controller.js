@@ -43,30 +43,30 @@ const pool = new Pool({
     idleTimeoutMillis: 30000,
 })
 
-export const getAll = async () => usersStub;
+export const getAll = async () => getByQuery({params: {query: ''}});
 
-export const getByQuery = async ({ params: { query } }) => usersStub; //{
-//     const result = await pool.query(
-//         `SELECT user_name,id,investigation_group,is_admin	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
-//     );
+export const getByQuery = async ({ params: { query } }) => {
+    const result = await pool.query(
+        `SELECT user_name,id,investigation_group,is_admin,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
+    );
 
-//     const users = result.rows.map(x => ({
-//         user_name: x['user_name'],
-//         id: x['id'],
-//         investigation_group: x['investigation_group'],
-//         is_admin: x['is_admin'],
+    const users = result.rows.map(x => ({
+        user_name: x['user_name'],
+        id: x['id'],
+        investigation_group: x['investigation_group'],
+        is_admin: x['is_admin'],
+        city: parseInt(x['city'])
+    }))
 
-//     }))
-
-//     return users;
-// }
+    return users;
+}
 
 export const update = async (req, res) => {
     try {
         const { groups, admins, cities } = req.body;
 
         const updatedGroup = await updateInvestigationGroup(groups)
-        const updatedCity = await updateInvestigationGroup(cities)
+        const updatedCity = await updateCity(cities)
         await turnOnOffAdmin(admins);
 
         res.status(200).send("updated users groups: " + updatedGroup + "\n updated admins:" + admins.map(x => x.id) + "\n updated users cities: " + updatedCity)
