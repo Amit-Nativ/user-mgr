@@ -41,20 +41,24 @@ const pool = new Pool({
     statement_timeout: 4000,
     idleTimeoutMillis: 30000,
 })
-export const getByQuery = async ({ params: { query } }) => {
-    const result = await pool.query(
-        `SELECT user_name,id,investigation_group,is_admin	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
-    );
 
-    const users = result.rows.map(x => ({
-        user_name: x['user_name'],
-        id: x['id'],
-        investigation_group: x['investigation_group'],
-        is_admin: x['is_admin']
-    }))
+export const getAll = async () => usersStub;
 
-    return users;
-}
+export const getByQuery = async ({ params: { query } }) => usersStub; //{
+//     const result = await pool.query(
+//         `SELECT user_name,id,investigation_group,is_admin	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
+//     );
+
+//     const users = result.rows.map(x => ({
+//         user_name: x['user_name'],
+//         id: x['id'],
+//         investigation_group: x['investigation_group'],
+//         is_admin: x['is_admin'],
+
+//     }))
+
+//     return users;
+// }
 
 export const update = async (req, res) => {
     try {
@@ -70,6 +74,7 @@ export const update = async (req, res) => {
         res.status(400).send("failed updating investigation group for all users")
     }
 };
+
 
 const turnOnOffAdmin = async (body) => {
     //EXPECT : [{"id": "ANSWER", "is_admin": "True/False"}]
