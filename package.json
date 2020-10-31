@@ -1,31 +1,26 @@
 {
-  "name": "allright",
+  "name": "mgr",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
     "client-dev": "webpack-dev-server --open --config webpack.config.js --define process.env.NODE_ENV=\\\"'development'\\\"\" ",
-    "server-dev": "nodemon --watch server --exec babel-node server/app.js",
+    "server-dev": "nodemon server/app.js --watch server --exec babel-node ",
     "build": "npm run clean && npm run build-server && npm run build-client",
     "build-client": "webpack --env=production --mode=production  --define process.env.NODE_ENV=\"'production'\"",
     "build-server": "babel server -d dist -s && npm run copy-env",
     "copy-env": "copyfiles .env dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/idoperach/finalproject.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://gitlab.com/idoperach/finalproject/issues"
   },
-  "homepage": "https://gitlab.com/idoperach/finalproject#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.3",
-    "@babel/core": "^7.11.1",
-    "@babel/node": "^7.10.3",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/plugin-proposal-decorators": "^7.10.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.10.3",
