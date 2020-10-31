@@ -72,7 +72,6 @@
     "history": "4.10.1",
     "http-errors": "latest",
     "in-production": "^1.0.1",
-    "joi": "^14.3.1",
     "lodash": "^4.17.19",
     "mongoose": "^5.9.19",
     "mongoose-plugin-seed": "^0.4.0",

@@ -43,8 +43,6 @@ const pool = new Pool({
     idleTimeoutMillis: 30000,
 })
 
-export const getAll = async () => getByQuery({params: {query: ''}});
-
 export const getByQuery = async ({ params: { query } }) => {
     const result = await pool.query(
         `SELECT user_name,id,investigation_group,is_admin,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`

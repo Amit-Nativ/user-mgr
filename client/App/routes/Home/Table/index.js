@@ -10,7 +10,7 @@ import Select from 'react-select'
 import investigationGroupsEnum from '../../../../assets/resources/investigation-groups'
 import citiesEnum from '../../../../assets/resources/cities'
 
-export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
+export default ({ results, onGroupChange, onCityChange, onAdminChange, onNameChange }) => {
     const classes = useStyles();
 
     return (
@@ -28,8 +28,12 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
                 <TableBody>
                     {results.map((user, i) => (
                         <TableRow key={user.id}>
-                            <TableCell align="right" name={user.id}>{user.id} </TableCell>
-                            <TableCell align="right" name={user.id}>{user.user_name} </TableCell>
+                            <TableCell align="right">{user.id} </TableCell>
+                            <TableCell align="right"
+                                name={i}
+                                value={user.user_name}
+                                component={TextField}
+                                onChange={onNameChange} />
                             <TableCell align="right"
                                 defaultValue={user.city}
                                 searchable
@@ -41,7 +45,6 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
                                 value={user.investigation_group}
                                 select
                                 component={TextField}
-                                type='number'
                                 onChange={onGroupChange}>
                                 {investigationGroupsEnum.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>

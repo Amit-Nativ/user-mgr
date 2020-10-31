@@ -11,6 +11,7 @@ export default () => {
   const [adminsDiff, setAdminsDiff] = useState({});
   const [groupDiff, setGroupDiff] = useState({});
   const [cityDiff, setCityDiff] = useState({});
+  const [namesDiff, setNamesDiff] = useState({});
 
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
@@ -20,6 +21,12 @@ export default () => {
     data[name].investigation_group = value;
 
     setGroupDiff(x => ({ ...x, [data[name].id]: { investigation_group: value } }));
+  }
+
+  const handleNameChange = ({ target: { value, name } }) => {
+    data[name].user_name = value;
+
+    setNamesDiff(x => ({ ...x, [data[name].id]: { user_name: value } }));
   }
 
   const handleCityChange = ({ value }, name) => {
@@ -38,6 +45,11 @@ export default () => {
     try {
       clear();
 
+      if (!query) {
+        alert('יש להקליד שם לחיפוש');
+        return;
+      }
+
       const { data } = await Axios.get(`/api/users/${query}`);
       setData(data)
     } catch (e) {
@@ -50,18 +62,20 @@ export default () => {
     setError(false);
     setAdminsDiff({});
     setGroupDiff({});
+    setNamesDiff({});
     setCityDiff({});
   }
 
   const submit = async () => {
     const groups = Object.keys(groupDiff).map(x => ({ id: x, ...groupDiff[x] }))
+    const names = Object.keys(namesDiff).map(x => ({ id: x, ...namesDiff[x] }))
     const cities = Object.keys(cityDiff).map(x => ({ id: x, ...cityDiff[x] }))
     const admins = Object.keys(adminsDiff).map(x => ({ id: x, ...adminsDiff[x] }))
 
     var response = { data: {} };
 
     try {
-      response = await Axios.put(`/api/users`, { admins, groups, cities });
+      response = await Axios.put(`/api/users`, { admins, groups, cities, names });
     } catch (e) {
       console.log(e);
       if (e.response.status === 400) {
@@ -85,7 +99,7 @@ export default () => {
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
-        <ResultsTable results={data} onGroupChange={handleGroupChange} onCityChange={handleCityChange} onAdminChange={handleAdminChange} />
+        <ResultsTable results={data} onGroupChange={handleGroupChange} onNameChange={handleNameChange} onCityChange={handleCityChange} onAdminChange={handleAdminChange} />
         <Button onClick={submit} color='primary'>{'שמור'}</Button>
       </Box>}
     </Box>
