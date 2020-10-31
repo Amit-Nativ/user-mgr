@@ -63,16 +63,17 @@ export const getByQuery = async ({ params: { query } }) => usersStub; //{
 
 export const update = async (req, res) => {
     try {
-        const { groups, admins } = req.body;
+        const { groups, admins, cities } = req.body;
 
-        const updated = await updateInvestigationGroup(groups)
+        const updatedGroup = await updateInvestigationGroup(groups)
+        const updatedCity = await updateInvestigationGroup(cities)
         await turnOnOffAdmin(admins);
 
-        res.status(200).send("updated users groups: " + updated + " updated admins:" + admins.map(x => x.id))
+        res.status(200).send("updated users groups: " + updatedGroup + "\n updated admins:" + admins.map(x => x.id) + "\n updated users cities: " + updatedCity)
     }
     catch (e) {
         logger.error(e);
-        res.status(400).send("failed updating investigation group for all users")
+        res.status(400).send("failed updating investigation group/ city for all users")
     }
 };
 
@@ -103,6 +104,24 @@ const updateInvestigationGroup = async (body) => {
 
             updated.push(user.id)
         } catch (e) { logger.error(`could not update group for user ${user.id}`); }
+    });
+
+    return updated;
+}
+
+const updateCity = async (body) => {
+    //EXPECT : {[{"id": "ANSWER", "ivestigation_group": "ANSWER"},{"id": "ANSWER", "ivestigation_group": "ANSWER"}]}
+    var updated = []
+
+    body.forEach(async (user) => {
+        // console.log(user)
+        try {
+            var value = await pool.query(
+                `UPDATE public."user" SET city='${user.city}' WHERE id='${user.id}'; `
+            );
+
+            updated.push(user.id)
+        } catch (e) { logger.error(`could not update city for user ${user.id}`); }
     });
 
     return updated;

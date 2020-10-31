@@ -22,7 +22,7 @@ export default () => {
     setGroupDiff(x => ({ ...x, [data[name].id]: { investigation_group: value } }));
   }
 
-  const handleCityChange = ({ target: { value, name } }) => {
+  const handleCityChange = ({ value }, name) => {
     data[name].city = value;
 
     setCityDiff(x => ({ ...x, [data[name].id]: { city: value } }));
@@ -107,7 +107,7 @@ const useStyles = makeStyles({
   },
   centered: {
     display: 'flex',
-    width: '900px',
+    width: '95%',
     flexDirection: 'column',
     alignSelf: 'center'
   },

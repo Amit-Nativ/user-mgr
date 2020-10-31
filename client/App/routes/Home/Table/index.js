@@ -6,7 +6,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Checkbox, makeStyles, MenuItem, TextField } from '@material-ui/core';
-import { invjson } from '../../../../assets/resources/investigation-groups'
+import Select from 'react-select'
+import investigationGroupsEnum from '../../../../assets/resources/investigation-groups'
+import citiesEnum from '../../../../assets/resources/cities'
 
 export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
     const classes = useStyles();
@@ -18,9 +20,9 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
                     <TableRow>
                         <TableCell align="right">{'שם משתמש'}</TableCell>
                         <TableCell align="right">{'שם מלא'}</TableCell>
+                        <TableCell align="right">{'עיר'}</TableCell>
                         <TableCell align="right">{'נפה'}</TableCell>
                         <TableCell align="right">{'אדמין'}</TableCell>
-                        <TableCell align="right">{'עיר'}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -29,13 +31,19 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
                             <TableCell align="right" name={user.id}>{user.id} </TableCell>
                             <TableCell align="right" name={user.id}>{user.user_name} </TableCell>
                             <TableCell align="right"
+                                defaultValue={user.city}
+                                searchable
+                                component={Select}
+                                options={citiesEnum}
+                                onChange={e => onCityChange(e, i)} />
+                            <TableCell align="right"
                                 name={i}
                                 value={user.investigation_group}
                                 select
                                 component={TextField}
                                 type='number'
                                 onChange={onGroupChange}>
-                                {invjson.map((option) => (
+                                {investigationGroupsEnum.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
@@ -48,20 +56,6 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange }) => {
                                     name={i}
                                     checked={user.is_admin ? true : false}
                                     onChange={onAdminChange} />
-                            </TableCell>
-                            <TableCell align="right"
-                                name={i}
-                                value={user.city}
-                                select
-                                component={TextField}
-                                type='number'
-                                onChange={onCityChange}>
-                                {invjson.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                                {user.investigation_group}
                             </TableCell>
                         </TableRow>
                     ))}
