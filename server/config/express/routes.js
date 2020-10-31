@@ -14,5 +14,5 @@ export default app => {
     });
 
   app.route('/*')
-    .get((req, res) => res.sendFile(join(__dirname, '..', '..', '..', 'client', 'index.html')));
+    .get((req, res) => res.sendFile(join(__dirname, '..', '..', 'client', 'index.html')));
 };
