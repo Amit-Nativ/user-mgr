@@ -33,6 +33,8 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange, onNameCha
                                 name={i}
                                 value={user.user_name}
                                 component={TextField}
+                                error={user.error}
+                                helperText={'אסור תווים מיוחדים'}
                                 onChange={onNameChange} />
                             <TableCell align="right"
                                 defaultValue={user.city}

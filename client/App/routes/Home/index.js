@@ -17,6 +17,12 @@ export default () => {
     setQuery(value);
   }
 
+  const hasSpecialCharacters = (value) => {
+    var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    return format.test(value);
+  }
+
   const handleGroupChange = ({ target: { value, name } }) => {
     data[name].investigation_group = value;
 
@@ -24,6 +30,12 @@ export default () => {
   }
 
   const handleNameChange = ({ target: { value, name } }) => {
+    if (hasSpecialCharacters(value)) {
+      data[name].error = true;
+      return;
+    }
+
+    data[name].error = false;
     data[name].user_name = value;
 
     setNamesDiff(x => ({ ...x, [data[name].id]: { user_name: value } }));
