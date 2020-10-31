@@ -44,8 +44,6 @@ const pool = new Pool({
 })
 
 export const getByQuery = async ({ params: { query } }) => {
-    return usersStub;
-
     const result = await pool.query(
         `SELECT user_name,id,investigation_group,is_admin,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
     );
