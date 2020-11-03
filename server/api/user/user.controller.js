@@ -45,14 +45,14 @@ const pool = new Pool({
 
 export const getByQuery = async ({ params: { query } }) => {
     const result = await pool.query(
-        `SELECT user_name,id,investigation_group,is_admin,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
+        `SELECT user_name,id,investigation_group,user_type,city	FROM public."user"	where	user_name like '%${query}%' OR id like '%${query}%'`
     );
 
     const users = result.rows.map(x => ({
         user_name: x['user_name'],
         id: x['id'],
         investigation_group: x['investigation_group'],
-        is_admin: x['is_admin'],
+        is_admin: (x['user_type'] == 1 ? false : true),
         city: parseInt(x['city'])
     }))
 
@@ -82,10 +82,10 @@ const turnOnOffAdmin = async (body) => {
 
     body.forEach(async (element) => {
         await pool.query(
-            `UPDATE public."user" SET is_admin='${element.is_admin}' WHERE id='${element.id}'; `
+            `UPDATE public."user" SET user_type=${element.is_admin == 'true' ? '2' : '1'} WHERE id='${element.id}'; `
         );
         logger.info(
-            `successfully changed the status of the admin_id : ${element.id} to the following status: ${element.is_admin}`
+            `successfully changed the status of the admin_id : ${element.id} to the following status: ${element.is_admin ? '2' : '1'}`
         );
     });
 };

@@ -9,11 +9,11 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     resolve: {
         alias: {
             'react-dom': '@hot-loader/react-dom',
-            assets: path.resolve(__dirname, './client/assets'),
+            assets: path.resolve(__dirname, './client/'),
             components: path.resolve(__dirname, './client/components'),
             shell: path.resolve(__dirname, './client/App/Shell/'),
             clientCommon: path.resolve(__dirname, './client/common'),

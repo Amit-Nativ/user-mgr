@@ -85,13 +85,13 @@ export default createMuiTheme({
         }
     },
     typography: {
-        fontFamily: "Open Sans Hebrew",
+        // fontFamily: "Open Sans Hebrew",
         button: {
             //fontWeight: "fontWeightMedium",
             fontSize: "0.8rem",
             letterSpacing: "0.05em",
             fontWeight: "normal",
-            fontFamily: "Open Sans Hebrew",
+            // fontFamily: "Open Sans Hebrew",
         },
         h1: {
             fontWeight: 800,
