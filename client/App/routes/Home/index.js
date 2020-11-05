@@ -133,7 +133,8 @@ const useStyles = makeStyles({
   },
   centered: {
     display: 'flex',
-    width: '95%',
+    width: '75%',
+    flexGrow: 1,
     flexDirection: 'column',
     alignSelf: 'center'
   },

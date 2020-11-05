@@ -72,6 +72,6 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange, onNameCha
 
 const useStyles = makeStyles({
     container: {
-        height: '430px'
+        overflow: 'auto'
     }
 });
