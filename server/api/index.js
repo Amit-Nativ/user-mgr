@@ -6,6 +6,6 @@ import countie from './countie';
 const router = AsyncRouter();
 
 router.use('/users', user);
-router.use('/conties', countie);
+router.use('/counties', countie);
 
 export default router;

@@ -13,7 +13,7 @@ export const turnOffAllCounties = async () => {
 }
 export const turnOffById = async ({ params: { id } }) => {
     try {
-        await pool.query(`UPDATE public."user" SET is_active=false WHERE id LIKE '${id}';`)
+        await pool.query(`UPDATE public."user" SET is_active=false WHERE investigation_group='${id}';`)
         logger.info(`All users of countie number ${id} have been turned off`)
 
         return 200;
