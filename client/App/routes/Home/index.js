@@ -24,9 +24,9 @@ export default () => {
   const handleClose = () => setOpen(false);
 
   const hasSpecialCharacters = (value) => {
-    var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    var forbiddenCharacters = /[`!@#$%^&*_+=\[\]{};:\\|,.<>\/?~]/;
 
-    return format.test(value);
+    return forbiddenCharacters.test(value);
   }
 
   const handleGroupChange = ({ target: { value, name } }) => {
@@ -143,8 +143,8 @@ const useStyles = makeStyles({
   },
   centered: {
     display: 'flex',
-    width: '75%',
-    flexGrow: 1,
+    width: '95%',
+    height: '80%',
     flexDirection: 'column',
     alignSelf: 'center'
   },
