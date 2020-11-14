@@ -1,4 +1,5 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import Axios from 'axios';
 import React, { useState } from 'react'
 import Select from 'react-select'
 import investigationGroups from '../../../../assets/resources/investigation-groups'
@@ -13,8 +14,19 @@ export default () => {
         setSelected(selectedLabel);
     }
 
-    const submit = () => {
-        alert(selected);
+    const submit = async () => {
+        try {
+            if (selected.value === 'all') {
+                await Axios.put('/api/counties')
+            } else {
+                await Axios.put(`/api/counties/${selected.value}`)
+            }
+        } catch (e) {
+            alert('קרתה שגיאה')
+            console.log(e)
+        }
+
+        alert('הפעולה בוצעה!')
     }
 
     return (

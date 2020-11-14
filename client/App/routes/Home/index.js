@@ -101,7 +101,7 @@ export default () => {
       }
     }
 
-    alert('נא לבדוק בלוג את רשימת המשתמשים שעודכנו');
+    alert('הפעולה בוצעה!');
     console.log(response.data);
   }
 
