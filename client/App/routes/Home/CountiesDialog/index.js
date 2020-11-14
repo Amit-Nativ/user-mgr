@@ -31,13 +31,16 @@ export default () => {
 
     return (
         <Box className={classes.modal}>
-            <Typography>{'select countie to turn off'}</Typography>
+            <Box display='flex' justifyContent='center'>
+                <Typography variant='h5'>{'נא לבחור נפה לכיבוי'}</Typography>
+            </Box>
             <Select
                 searchable
                 options={counties}
                 onChange={handleChange}
+                styles={{ width: '100%' }}
             />
-            <Button onClick={submit}>{'turn off'}</Button>
+            <Button className={classes.button} onClick={submit}>{'כבה משתמשים'}</Button>
         </Box>
     )
 }
@@ -53,6 +56,12 @@ const useStyles = makeStyles({
         height: '300px',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+    },
+    button: {
+        margin: '8px 15px',
+        height: 'fit-content',
+        color: 'white',
+        backgroundColor: '#00838F',
     }
 })

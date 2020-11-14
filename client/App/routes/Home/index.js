@@ -114,7 +114,7 @@ export default () => {
           onChange={handleChange}
           variant="outlined" />
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
-        <Button className={classes.button} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
+        <Button className={classes.button} style={{ backgroundColor: '#00838F' }} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
         <Modal className={classes.modalBox} open={open} onClose={handleClose}>
           <CountiesDialog />
         </Modal>
@@ -122,7 +122,7 @@ export default () => {
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
         <ResultsTable results={data} onGroupChange={handleGroupChange} onNameChange={handleNameChange} onCityChange={handleCityChange} onAdminChange={handleAdminChange} />
-        <Button onClick={submit} color='primary'>{'שמור'}</Button>
+        <Button onClick={submit} className={classes.button}>{'שמור'}</Button>
       </Box>}
     </Box>
   );
@@ -139,7 +139,7 @@ const useStyles = makeStyles({
     margin: '8px 15px',
     height: 'fit-content',
     color: 'white',
-    backgroundColor: 'rgb(240,149,175)',
+    backgroundColor: '#4dd0e1',
   },
   centered: {
     display: 'flex',
