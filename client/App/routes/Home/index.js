@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core'
+import { Box, Button, makeStyles, Modal, TextField, Typography } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useState } from 'react';
 import ResultsTable from './Table'
@@ -12,10 +12,15 @@ export default () => {
   const [groupDiff, setGroupDiff] = useState({});
   const [cityDiff, setCityDiff] = useState({});
   const [namesDiff, setNamesDiff] = useState({});
+  const [open, setOpen] = useState(false);
 
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
   }
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
 
   const hasSpecialCharacters = (value) => {
     var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -108,6 +113,8 @@ export default () => {
           onChange={handleChange}
           variant="outlined" />
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
+        <Button className={classes.button} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
+        <Modal className={classes.modalBox} open={open} onClose={handleClose}><div className={classes.modal}><p>hi</p></div></Modal>
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
@@ -138,4 +145,14 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignSelf: 'center'
   },
+  modal: {
+    padding: '20px',
+    backgroundColor: '#fefefe',
+    margin: 'auto',
+    border: '1px solid #888',
+    alignSelf: 'center'
+  },
+  modalBox: {
+    display: 'flex'
+  }
 });
