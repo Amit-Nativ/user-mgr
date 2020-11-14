@@ -1,7 +1,5 @@
-import createError from 'http-errors';
-import _ from 'lodash';
-import { Pool } from 'pg';
 import logger from '../../config/logger'
+import pool from '../../config/pg'
 
 const usersStub = [
     { "user_name": "אמיל סופר", "id": "8372435", "phone_number": "0524846380", "investigation_group": "9999", "is_admin": "false", "city": "12" },
@@ -33,15 +31,6 @@ const usersStub = [
     { "user_name": "עידן אטדגי", "id": "8377379", "phone_number": "0509503133", "investigation_group": "12", "is_admin": "false", "city": "12" },
     { "user_name": "מור גורן", "id": "goren.mor", "phone_number": "0504590440", "investigation_group": "12", "is_admin": "false", "city": "12" }];
 
-const CONNECTION_STRING = {
-    connectionString: process.env.CONN
-};
-
-const pool = new Pool({
-    ...CONNECTION_STRING,
-    statement_timeout: 4000,
-    idleTimeoutMillis: 30000,
-})
 
 export const getByQuery = async ({ params: { query } }) => {
     const result = await pool.query(

@@ -1,6 +1,7 @@
 import { Box, Button, makeStyles, Modal, TextField, Typography } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useState } from 'react';
+import CountiesDialog from './CountiesDialog';
 import ResultsTable from './Table'
 
 export default () => {
@@ -114,7 +115,9 @@ export default () => {
           variant="outlined" />
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
         <Button className={classes.button} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
-        <Modal className={classes.modalBox} open={open} onClose={handleClose}><div className={classes.modal}><p>hi</p></div></Modal>
+        <Modal className={classes.modalBox} open={open} onClose={handleClose}>
+          <CountiesDialog />
+        </Modal>
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
@@ -143,13 +146,6 @@ const useStyles = makeStyles({
     width: '75%',
     flexGrow: 1,
     flexDirection: 'column',
-    alignSelf: 'center'
-  },
-  modal: {
-    padding: '20px',
-    backgroundColor: '#fefefe',
-    margin: 'auto',
-    border: '1px solid #888',
     alignSelf: 'center'
   },
   modalBox: {

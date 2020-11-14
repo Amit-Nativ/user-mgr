@@ -40,6 +40,7 @@ export default ({ results, onGroupChange, onCityChange, onAdminChange, onNameCha
                                 defaultValue={user.city}
                                 searchable
                                 component={Select}
+                                isRtl
                                 options={citiesEnum}
                                 onChange={e => onCityChange(e, i)} />
                             <TableCell align="right"
