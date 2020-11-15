@@ -82,6 +82,6 @@ const useStyles = makeStyles({
         margin: '8px 15px',
         height: 'fit-content',
         color: 'white',
-        backgroundColor: '#00838F',
+        backgroundColor: '#00acc1',
     }
 })

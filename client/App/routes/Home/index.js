@@ -114,7 +114,7 @@ export default () => {
           onChange={handleChange}
           variant="outlined" />
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
-        <Button className={classes.button} style={{ backgroundColor: '#00838F' }} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
+        <Button className={classes.button} style={{ backgroundColor: '#00acc1' }} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
         {open && <Modal className={classes.modalBox} open={open} onClose={handleClose}>
           <CountiesDialog />
         </Modal>}
@@ -139,7 +139,7 @@ const useStyles = makeStyles({
     margin: '8px 15px',
     height: 'fit-content',
     color: 'white',
-    backgroundColor: '#4dd0e1',
+    backgroundColor: 'rgb(240,149,175)',
   },
   centered: {
     display: 'flex',
