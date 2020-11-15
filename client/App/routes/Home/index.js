@@ -116,7 +116,7 @@ export default () => {
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
         <Button className={classes.button} style={{ backgroundColor: '#00acc1' }} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
         {open && <Modal className={classes.modalBox} open={open} onClose={handleClose}>
-          <CountiesDialog />
+          <CountiesDialog setOpen={setOpen} />
         </Modal>}
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import counties from '../../../../assets/resources/counties'
 
-export default () => {
+export default ({ setOpen }) => {
     const classes = useStyles();
     const [selected, setSelected] = useState(undefined);
     const [confirmationOpen, setConfirmationOpen] = useState(false);
@@ -22,10 +22,13 @@ export default () => {
             }
 
             alert('הפעולה בוצעה!')
+            setOpen(false)
         } catch (e) {
             alert('קרתה שגיאה')
             console.log(e)
         }
+
+        setConfirmationOpen(false)
     }
 
     const handleSubmit = () => {
