@@ -122,7 +122,7 @@ export default () => {
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>
         <ResultsTable results={data} onGroupChange={handleGroupChange} onNameChange={handleNameChange} onCityChange={handleCityChange} onAdminChange={handleAdminChange} />
-        <Button onClick={submit} className={classes.button}>{'שמור'}</Button>
+        <Button onClick={submit}>{'שמור'}</Button>
       </Box>}
     </Box>
   );
