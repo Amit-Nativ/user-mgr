@@ -115,9 +115,9 @@ export default () => {
           variant="outlined" />
         <Button className={classes.button} onClick={handleClick}>{'חפש'}</Button>
         <Button className={classes.button} style={{ backgroundColor: '#00838F' }} onClick={handleOpen}>{'כיבוי משתמשים'}</Button>
-        <Modal className={classes.modalBox} open={open} onClose={handleClose}>
+        {open && <Modal className={classes.modalBox} open={open} onClose={handleClose}>
           <CountiesDialog />
-        </Modal>
+        </Modal>}
       </Box>
       {error && <Typography variant='h4'>{'אירעה שגיאה'}</Typography>}
       {data && <Box className={classes.centered}>

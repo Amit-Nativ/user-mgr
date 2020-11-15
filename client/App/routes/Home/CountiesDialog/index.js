@@ -1,33 +1,43 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import { Box, Button, makeStyles, Modal, Typography } from '@material-ui/core'
 import Axios from 'axios';
 import React, { useState } from 'react'
 import Select from 'react-select'
-import investigationGroups from '../../../../assets/resources/investigation-groups'
-
-const counties = [{ value: 'all', label: 'כל הנפות' }, ...investigationGroups];
+import counties from '../../../../assets/resources/counties'
 
 export default () => {
     const classes = useStyles();
-    const [selected, setSelected] = useState({});
+    const [selected, setSelected] = useState(undefined);
+    const [confirmationOpen, setConfirmationOpen] = useState(false);
 
     const handleChange = (selectedLabel) => {
         setSelected(selectedLabel);
     }
 
-    const submit = async () => {
+    const handleSubmitConfirmed = async () => {
         try {
             if (selected.value === 'all') {
                 await Axios.put('/api/counties')
             } else {
                 await Axios.put(`/api/counties/${selected.value}`)
             }
+
+            alert('הפעולה בוצעה!')
         } catch (e) {
             alert('קרתה שגיאה')
             console.log(e)
         }
-
-        alert('הפעולה בוצעה!')
     }
+
+    const handleSubmit = () => {
+        if (!selected) {
+            alert('יש לבחור נפה לכיבוי')
+            return;
+        }
+
+        setConfirmationOpen(true);
+    }
+
+    const handleClose = () => setConfirmationOpen(false);
 
     return (
         <Box className={classes.modal}>
@@ -40,7 +50,17 @@ export default () => {
                 onChange={handleChange}
                 styles={{ width: '100%' }}
             />
-            <Button className={classes.button} onClick={submit}>{'כבה משתמשים'}</Button>
+            <Button className={classes.button} onClick={handleSubmit}>{'העבר את כל משתמשי הנפה למצב לא פעיל'}</Button>
+            {confirmationOpen &&
+                <Modal open={confirmationOpen} onClose={handleClose} display='flex'>
+                    <Box height='180px!important' className={classes.modal}>
+                        <Typography variant='h5'>{'הפעולה הבאה צפויה להעביר למצב "לא פעיל" את כל משתמשי הנפה ולא לאפשר להקצות להן חקירות. האם אתה בטוח שתרצה להמשיך?'}</Typography>
+                        <Box display='flex' justifyContent={'space-between'}>
+                            <Button onClick={handleClose}>{'ביטול'}</Button>
+                            <Button onClick={handleSubmitConfirmed}>{'אישור'}</Button>
+                        </Box>
+                    </Box>
+                </Modal>}
         </Box>
     )
 }
